@@ -1,10 +1,10 @@
 class PhotographerTemplate {
-  constructor(card) {
-    this.card = card;
+  constructor(data) {
+    this.data = data;
   }
 
   createProfile() {
-    const { id, name, city, country, price, tagline, portrait } = this.card;
+    const { id, name, city, country, price, tagline, portrait } = this.data;
 
     const picture = `assets/photographers/${portrait}`;
 
@@ -30,5 +30,124 @@ class PhotographerTemplate {
     article.appendChild(p);
     link.append(article);
     return link;
+  }
+
+  createDetail() {
+    const { name, city, country, portrait, price, tagline } = this.data;
+    // insérer le nom
+    const nameElem = document.querySelector(".photographer-name");
+    nameElem.innerText = name;
+    nameElem.setAttribute("tabindex", "0");
+
+    // insérer l'adresse
+    const address = document.querySelector(".photographer-address div");
+    address.setAttribute(
+      "aria-label",
+      `Adresse du photographe : ${city}, ${country}`
+    );
+    address.innerText = `${city}, ${country}`;
+
+    // insérer tagline
+    const taglineElem = document.querySelector(".photographer-tagline");
+    taglineElem.setAttribute(
+      "aria-label",
+      `Tagline du photographe : ${tagline}`
+    );
+    taglineElem.innerText = tagline;
+
+    // insérer image
+    const img = document.createElement("img");
+    img.setAttribute("src", `assets/photographers/${portrait}`);
+    img.setAttribute("alt", `Portrait de ${name}`);
+    img.setAttribute("tabindex", "0");
+    const portraitElem = document.querySelector(".photographer-img");
+    portraitElem.appendChild(img);
+
+    // insére le prix
+    const priceElement = document.querySelector(".likes-widget_price");
+    priceElement.innerText = `${price} € / jour`;
+    priceElement.setAttribute('aria-label', `Tarif du photographe : ${price} euros par jour`);
+  }
+
+  createMediaPost(type) {
+    const { id, photographerId, photographerName, title, image, video, likes, date, price } = this.data;
+
+    // recuperer juste le le prénom du photographer et remplacer - par espace
+    const name = photographerName.split(' ')[0].replace('-', ' ');
+
+    const article = document.createElement("article");
+    article.classList.add("media-card");
+    const mediaContainer = document.createElement("div");
+    mediaContainer.classList.add("media-container");
+
+    // création du media
+    let mediaElement;
+    if (type === "image") {
+      mediaElement = document.createElement("img");
+      mediaElement.setAttribute(
+        "src",
+        `assets/images/${name}/${image}`
+      );
+    } else {
+      mediaElement = document.createElement("video");
+      mediaElement.setAttribute(
+        "src",
+        `assets/images/${name}/${video}`
+      );
+      mediaElement.setAttribute("controls", "");
+      mediaElement.setAttribute("aria-label", "Video : " + title);
+    }
+
+    mediaElement.setAttribute("alt", title);
+    mediaElement.setAttribute("title", title);
+    mediaElement.setAttribute("tabindex", "0");
+
+    mediaContainer.appendChild(mediaElement);
+    article.appendChild(mediaContainer);
+
+    // création du bloc media-info
+    const mediaInfo = document.createElement("div");
+    mediaInfo.classList.add("media-info");
+
+    // création du titre du media
+    const mediaTitle = document.createElement("h2");
+    mediaTitle.innerText = title;
+    mediaTitle.setAttribute("tabindex", "0");
+    mediaInfo.appendChild(mediaTitle);
+
+    // création du bloc like
+    const likeContainer = document.createElement("div");
+    likeContainer.classList.add("like-container");
+    likeContainer.setAttribute("aria-label", "Nombre de likes");
+
+    // creation nombre de like
+    const likesElem = document.createElement("span");
+    likesElem.classList = "media-likes";
+    likesElem.innerText = likes;
+    likesElem.setAttribute("aria-label", `${likes} j'aime`);
+
+    likesElem.setAttribute("tabindex", "0");
+    likeContainer.appendChild(likesElem);
+
+    // creation DE l'icone
+    const likeIcon = document.createElement("em");
+    likeIcon.classList = "fa-solid fa-heart";
+    const likeButton = document.createElement("button");
+    likeButton.classList = "btn-like";
+    likeButton.setAttribute("aria-label", "Cliquer pour aimer");
+
+    likeButton.appendChild(likeIcon);
+    likeContainer.appendChild(likeButton);
+    mediaInfo.appendChild(likeContainer);
+    article.appendChild(mediaInfo);
+    return article;
+  }
+
+  createImagePost() {
+    return this.createMediaPost("image");
+  }
+
+  createVideoPost() {
+    return this.createMediaPost("video");
   }
 }

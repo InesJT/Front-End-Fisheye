@@ -1,7 +1,9 @@
 class PhotographerFactory {
-  constructor(card, type) {
+  constructor(data, type) {
     if (type === "profile") {
-      return new PhotographerTemplate(card).createProfile();
+      return new PhotographerTemplate(data).createProfile();
+    } else if (type === "detail") {
+      return new PhotographerTemplate(data).createDetail();
     } else {
       throw "Photographer factory error: unknown type format";
     }

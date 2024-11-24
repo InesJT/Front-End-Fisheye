@@ -5,33 +5,73 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Fisheye - photographe </title>
   </head>
-  <body>
-    <header>
+  <body class="container">
+    <header >
       <img src="assets/images/logo.png" class="logo" />
     </header>
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <section class="photograph-header">
+        <div class="photographer-infos">
+          <h1 class="photographer-name"></h1>
+          <address role="presentation" class="photographer-address">
+            <div tabindex="0"></div>
+          </address>
+          <p class="photographer-tagline" tabindex="0"></p>
+        </div>
+        <div class="contact_button-container">
+          <button class="contact_button">Contactez-moi</button>
+        </div>
+        <div class="photographer-img"></div>
+        <div id="contact_modal">
+          <div class="modal">
+            <h2>Contactez-moi</h2>
+            <img src="assets/icons/close.svg" onclick="closeModal()" />
+            <form>
+              <div>
+                <label>Prénom</label>
+                <input />
+              </div>
+              <button class="contact_button">Envoyer</button>
+            </form>
+          </div>
+        </div>
+      </section>
+      <div class="likes-widget">
+        <div class="likes-widget__details">
+          <span class="likes-widget__count" tabindex="0">0</span>
+          <em class="fa-solid fa-heart likes-widget__icon"></em>
+        </div>
+        <div class="likes-widget_price" tabindex="0"></div>
       </div>
+      <section class="media-filter" tabindex="0">
+        <label for="criteria" class="media-filter_label" tabindex="0" >Trier par</label>
+        <select
+          name="criteria"
+          id="criteria"
+          class="media-filter_select" 
+          data-context="filter-select" 
+          aria-label="Trier les medias" 
+        >
+          <option value="0">Popularité</option>     
+          <option value="1">Date</option>
+          <option value="2">Titre</option>
+        </select>
+      </section>
+      <section class="media"></section>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
     <script src="/scripts/pages/photographer.js"></script>
+    <script src="scripts/factories/photographer.js"></script>
+    <script src="scripts/factories/media.js"></script>
+    <script src="scripts/templates/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>
