@@ -30,6 +30,9 @@ async function init() {
     console.log(m.likes);
   });
   console.log(totalLikes);
+
+  new LightBoxTemplate().create();
+
 }
 
 init();

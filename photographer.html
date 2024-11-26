@@ -2,6 +2,9 @@
 <html>
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/photographer.css" rel="stylesheet" type="text/css" />
+    <link href="css/lightbox.css" rel="stylesheet" type="text/css" />
+    
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
@@ -92,11 +95,23 @@
         </select>
       </section>
       <section class="media"></section>
+      <dialog id="lightbox">
+        <div class="lightbox-container">
+          <button class="close-btn" aria-label="Fermer la lightbox">X</button>
+          <div class="lightbox-navigation">
+            <button class="arrow" id="prev" aria-label="Retour à l'image précédente">&#10094;</button>
+            <button class="arrow" id="next" aria-label="Passer à l'image suivante">&#10095;</button>
+          </div>
+          <div class="lightbox-media"></div>
+          <h3 id="lightboxTitle"></h3>
+        </div>
+      </dialog>
     </main>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/factories/media.js"></script>
     <script src="scripts/templates/photographer.js"></script>
+    <script src="scripts/templates/lightbox.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>
