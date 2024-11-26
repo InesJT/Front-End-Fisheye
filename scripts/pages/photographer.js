@@ -1,3 +1,33 @@
+function handleLikeButtons(medias) {
+  // gestion de click sur le like
+  const likeButtons = document.querySelectorAll(".btn-like");
+  likeButtons.forEach((likeButton, index) => {
+    likeButton.addEventListener("click", () => {
+      const likedMedia = medias[index];
+      if (likedMedia.liked) {
+        likedMedia.likes--;
+        likedMedia.liked = false;
+        likeButton.setAttribute("aria-label", "Cliquer pour aimer");
+      } else {
+        likedMedia.likes++;
+        likedMedia.liked = true;
+        likeButton.setAttribute("aria-label", "Cliquer pour retirer le j'aime");
+      }
+      const likesTexts = document.querySelectorAll(".media-likes");
+      likesTexts[index].innerText = likedMedia.likes;
+      this.updateTotalLikes(medias);
+    });
+  });
+}
+
+// afficher la somme des likes
+function updateTotalLikes(medias) {
+  const likesSum = medias.reduce((acc, media) => acc + media.likes, 0);
+  const likesSumWidget = document.querySelector(".likes-widget__count");
+  likesSumWidget.setAttribute("aria-label", `Nombre total des likes ${likesSum}`);
+  likesSumWidget.innerText = likesSum;
+}
+
 async function init() {
   const params = new URL(document.location).searchParams;
   const id = parseInt(params.get("id")); // Récupérer la valeur de l'id à partir de l'URL
@@ -7,31 +37,31 @@ async function init() {
   console.log("items", items);
   const photographer = items.photographers.find((i) => i.id === id);
   console.log("photographer", photographer);
-  const media = items.media.filter((i) => i.photographerId === id);
-  console.log("media", media);
+  const medias = items.media.filter((i) => i.photographerId === id);
+  console.log("media", medias);
 
   new PhotographerFactory(photographer, "detail");
 
   const mediaSection = document.querySelector(".media");
   mediaSection.innerHTML = "";
   let totalLikes = 0;
-  media.forEach((m) => {
-    // ajouter l'article à la section
-    // const template = mediaTemplate({ ...m, photographerName: photographer.name });
-    // const card = template.getMediaCardDOM();
+  medias.forEach((media) => {
     let card;
-    if (m.image) {
-      card = new MediaFactory({ ...m, photographerName: photographer.name }, "image");
+    if (media.image) {
+      card = new MediaFactory({ ...media, photographerName: photographer.name }, "image");
     } else {
-      card = new MediaFactory({ ...m, photographerName: photographer.name }, "video");
+      card = new MediaFactory({ ...media, photographerName: photographer.name }, "video");
     }
     mediaSection.append(card)
-    totalLikes = totalLikes + m.likes;
-    console.log(m.likes);
+    totalLikes = totalLikes + media.likes;
+    console.log(media.likes);
   });
   console.log(totalLikes);
 
   new LightBoxTemplate().create();
+
+  handleLikeButtons(medias);
+  updateTotalLikes(medias);
 
 }
 
