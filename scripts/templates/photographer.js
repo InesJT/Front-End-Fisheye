@@ -67,6 +67,34 @@ class PhotographerTemplate {
     const priceElement = document.querySelector(".likes-widget_price");
     priceElement.innerText = `${price} € / jour`;
     priceElement.setAttribute('aria-label', `Tarif du photographe : ${price} euros par jour`);
+
+    // Contact Modal
+    document.querySelector(".open_button").addEventListener("click", this.openModal);
+    document.querySelector(".close-modal").addEventListener("click", this.closeModal);
+    document.querySelector(".send_button").addEventListener("click", this.submitForm);
+  }
+
+  openModal() {
+    const dialog = document.getElementById("contact_modal");
+    dialog.showModal();
+    dialog.setAttribute("aria-modal", "true");
+    const firstNameField = document.getElementById("first-name");
+    firstNameField.focus();
+  }
+
+  closeModal() {
+    const dialog = document.getElementById("contact_modal");
+    dialog.close();
+    dialog.setAttribute("aria-modal", "false");
+    document.querySelector(".open_button").focus();    
+  }
+
+  submitForm() {
+    console.log("first-name", document.getElementById("first-name").value);
+    console.log("last-name", document.getElementById("last-name").value);
+    console.log("email", document.getElementById("email").value);
+    console.log("message", document.getElementById("message").value);
+
   }
 
   createMediaPost(type) {
