@@ -13,7 +13,8 @@ class PhotographerTemplate {
     link.setAttribute('class', 'linkCard');
     const article = document.createElement('article');
     const img = document.createElement('img');
-    img.setAttribute("src", picture)
+    img.setAttribute("src", picture);
+    img.setAttribute("alt", "image du photographer" +name);
     const h2 = document.createElement('h2');
     h2.innerText = name;
     const h3 = document.createElement('h3');
@@ -63,7 +64,7 @@ class PhotographerTemplate {
     const portraitElem = document.querySelector(".photographer-img");
     portraitElem.appendChild(img);
 
-    // insére le prix
+    // insérer le prix
     const priceElement = document.querySelector(".likes-widget_price");
     priceElement.innerText = `${price} € / jour`;
     priceElement.setAttribute('aria-label', `Tarif du photographe : ${price} euros par jour`);
@@ -100,7 +101,7 @@ class PhotographerTemplate {
   createMediaPost(type) {
     const { id, photographerId, photographerName, title, image, video, likes, date, price } = this.data;
 
-    // recuperer juste le le prénom du photographer et remplacer - par espace
+    // récuperer juste le prénom du photographer et remplacer - par espace
     const name = photographerName.split(' ')[0].replace('-', ' ');
 
     const article = document.createElement("article");
@@ -122,7 +123,7 @@ class PhotographerTemplate {
         "src",
         `assets/images/${name}/${video}`
       );
-      mediaElement.setAttribute("controls", "");
+      mediaElement.setAttribute("controls", true);
       mediaElement.setAttribute("aria-label", "Video : " + title);
     }
 
@@ -148,7 +149,7 @@ class PhotographerTemplate {
     likeContainer.classList.add("like-container");
     likeContainer.setAttribute("aria-label", "Nombre de likes");
 
-    // creation nombre de like
+    // création nombre de like
     const likesElem = document.createElement("span");
     likesElem.classList = "media-likes";
     likesElem.innerText = likes;
@@ -157,7 +158,7 @@ class PhotographerTemplate {
     likesElem.setAttribute("tabindex", "0");
     likeContainer.appendChild(likesElem);
 
-    // creation DE l'icone
+    // création DE l'icone
     const likeIcon = document.createElement("em");
     likeIcon.classList = "fa-solid fa-heart";
     const likeButton = document.createElement("button");
