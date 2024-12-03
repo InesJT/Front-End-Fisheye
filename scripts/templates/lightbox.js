@@ -46,7 +46,7 @@ class LightBoxTemplate {
       }
     });
 
-    // fermer le lightbox quand on clique dehors
+    // fermer la lightbox quand on clique dehors
     lightbox.addEventListener("click", (event) => {
       if (event.target === lightbox) {
         lightbox.close();
