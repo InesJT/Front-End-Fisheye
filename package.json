@@ -1,6 +1,5 @@
 {
   "scripts": {
-   "dev": "http-server",
    "lint": "eslint **/*.js"
   },
   "devDependencies": {
