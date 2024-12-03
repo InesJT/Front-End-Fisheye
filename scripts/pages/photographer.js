@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 function handleLikeButtons(medias) {
   // gestion de click sur le like
   const likeButtons = document.querySelectorAll(".btn-like");

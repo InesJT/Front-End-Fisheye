@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 class PhotographerTemplate {
   constructor(data) {
     this.data = data;
@@ -99,7 +100,7 @@ class PhotographerTemplate {
   }
 
   createMediaPost(type) {
-    const { id, photographerId, photographerName, title, image, video, likes, date, price } = this.data;
+    const { photographerName, title, image, video, likes } = this.data;
 
     // récuperer juste le prénom du photographer et remplacer - par espace
     const name = photographerName.split(' ')[0].replace('-', ' ');

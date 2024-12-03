@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 class PhotographerFactory {
   constructor(data, type) {
     if (type === "profile") {
